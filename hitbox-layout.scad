@@ -6,63 +6,41 @@ module large() {
     circle(d=30);
 }
 
-module rightHand() {
-    //http://www.slagcoin.com/joystick/layout/cluster36_m.png
-    translate([0, 0, 0]) {
-        children(0); //A
-    }
+//thumb position is always last
+leftHandLayout0 = [[-67.25, 18], [-31.25, 18], [0, 0], [15, -54]];
 
-    translate([31.25, 18, 0]) {
-        children(0); //B
-    }
+//http://www.slagcoin.com/joystick/layout/cluster36_m.png
+rightHandLayout0 = [[0,0], [31.25, 18], [0, 36], [31.25, 54], 
+    [67.25, 18], [67.25, 54], [102.25, 9], [102.25, 45]];
 
-    translate([0,18 * 2,0]) {
-        children(0); //X
-    }
-
-    translate([31.25, 18 * 3, 0]) {
-        children(0); //Y
-    }
-
-    translate([31.25 + 36, 18, 0]) {
-        children(0); //RT
-    }
-
-    translate([31.25 + 36, 18 * 3, 0]) {
-        children(0); //RB
-    }
-
-    translate([31.25 + 36 + 35, 9, 0]) {
-        children(0); //LT
-    }
-
-    translate([31.25 + 36 + 35, (18 * 2) + 9, 0]) {
-        children(0); //LB
+module rightHand(coords = []) {
+    for (i = [ 0 : len(coords) - 1 ]) {
+        point = coords[i];
+        translate([point[0], point[1], 0]) {
+            children(0);
+        }
     }
 }
 
-module leftHand() {
-    translate([-36 -31.25, 18, 0]) {
-        children(0); //L
+module leftHand(coords = []) {
+    for (i = [ 0 : len(coords) - 2 ]) {
+        point = coords[i];
+        translate([point[0], point[1], 0]) {
+            children(0);
+        }
     }
 
-    translate([-31.25, 18, 0]) {
-        children(0); //D
-    }
+    thumb = coords[len(coords)-1];
 
-    translate([0, 0, 0]) {
-        children(0); //R    
-    }
-
-    translate([15, -54, 0]) {
-        children(1); //U
+    translate([thumb[0], thumb[1], 0]) {
+        children(1);
     }
 }
 
 module hitbox() {
     translate([-16, 6, 0]) {
         rotate([0, 0, -15]) {
-            leftHand() {
+            leftHand(coords=leftHandLayout) {
                 small();
                 large(); 
             };
@@ -71,7 +49,7 @@ module hitbox() {
 
     translate([16, -6, 0]) {
         rotate([0, 0, 15]) {
-            rightHand() {
+            rightHand(coords=layout0) {
                 small();
             };       
         }
