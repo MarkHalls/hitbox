@@ -14,8 +14,7 @@ rightHandLayout0 = [[0,0], [31.25, 18], [0, 36], [31.25, 54],
     [67.25, 18], [67.25, 54], [102.25, 9], [102.25, 45]];
 
 module rightHand(coords = []) {
-    for (i = [ 0 : len(coords) - 1 ]) {
-        point = coords[i];
+    for (point=coords) {
         translate([point[0], point[1], 0]) {
             children(0);
         }
