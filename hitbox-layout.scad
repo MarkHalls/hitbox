@@ -59,20 +59,28 @@ module leftHand() {
     }
 }
 
-translate([-16, 6, 0]) {
-    rotate([0, 0, -15]) {
-        leftHand() {
-            small();
-            large(); 
-        };
+module hitbox() {
+    translate([-16, 6, 0]) {
+        rotate([0, 0, -15]) {
+            leftHand() {
+                small();
+                large(); 
+            };
+        }
+    }
+
+    translate([16, -6, 0]) {
+        rotate([0, 0, 15]) {
+            rightHand() {
+                small();
+            };       
+        }
     }
 }
-translate([16, -6, 0]) {
-    rotate([0, 0, 15]) {
-        rightHand() {
-            small();
-        };
-        
+
+difference() {
+    translate([20, 0, 0]) {
+        square(size=[220, 220], center=true); 
     }
-    
+    hitbox();
 }
