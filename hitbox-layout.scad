@@ -40,7 +40,7 @@ module leftHand(coords = []) {
 module hitbox() {
     translate([-16, 6, 0]) {
         rotate([0, 0, -15]) {
-            leftHand(coords=leftHandLayout) {
+            leftHand(coords=leftHandLayout0) {
                 small();
                 large(); 
             };
@@ -49,7 +49,7 @@ module hitbox() {
 
     translate([16, -6, 0]) {
         rotate([0, 0, 15]) {
-            rightHand(coords=layout0) {
+            rightHand(coords=rightHandLayout0) {
                 small();
             };       
         }
